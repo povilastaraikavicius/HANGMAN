@@ -1,13 +1,15 @@
 import random
+from typing import List
 from words import word_list
+from visual import visual_dict
 
 
-def choose_word(word_list):
+def choose_word(word_list: List[str]) -> str:
     random_word = random.choice(word_list)
     return random_word.upper()
 
 
-def display_word(word, guessed_letters):
+def display_word(word: str, guessed_letters: str) -> str:
     display = ""
     for letter in word:
         if letter in guessed_letters:
@@ -17,7 +19,7 @@ def display_word(word, guessed_letters):
     return display
 
 
-def display_full_word(word):
+def display_full_word(word: str) -> str:
     return word
 
 
@@ -32,23 +34,30 @@ def hangman():
 
     while attempts > 0:
         print("\n" + display_word(word, guessed_letters))
-        guess = input("Guess a letter or the entire word: ").upper()
+        guess = input("Guess a letter or Guess a word: ").upper()
 
         if guess == word:
-            print(
-                f"Congratulations! You've guessed the word: {display_full_word(word)}!"
-            )
+            print(f"Congratulations! You guessed the word: {display_full_word(word)}!")
             break
         elif len(guess) == 1 and guess.isalpha():
             if guess in guessed_letters:
-                print("You've already guessed that letter.")
+                attempts -= 1
+                lives -= 1
+                print(visual_dict[lives])
+                print("You already guessed that letter.")
+                print(
+                    f"You have {attempts} attempts and {lives} lives left. You have used these letters: {' '.join(guessed_letters)}"
+                )
                 continue
 
             guessed_letters.append(guess)
             if guess not in word:
                 lives -= 1
-                print(f"Incorrect! You have {lives} lives left.")
+                # --------------------------------------------------------------------------------
+                # print(f"Incorrect! You have {lives} lives left.")
+                # ---------------------------------------------------------------------------
                 if lives == 0:
+                    print(visual_dict[lives])
                     print(
                         f"Sorry, you are out of lives! The word was {display_full_word(word)}."
                     )
@@ -58,12 +67,14 @@ def hangman():
 
             attempts -= 1
             print(
-                f"You have {attempts} attempts and {lives} lives left. You have used these letters: {' '.join(guessed_letters)}"
+                f"Incorrect! You have {attempts} attempts and {lives} lives left. You have used these letters: {' '.join(guessed_letters)}"
             )
+            print(visual_dict[lives])
             if attempts == 0:
                 print(
                     f"Sorry, you are out of attempts! The word was {display_full_word(word)}."
                 )
+                print(visual_dict[0])
                 break
 
             if "_" not in display_word(word, guessed_letters):
@@ -72,7 +83,13 @@ def hangman():
                 )
                 break
         else:
-            print("Please enter a single letter or the entire word.")
+            attempts -= 1
+            lives -= 1
+            print(visual_dict[lives])
+            print(
+                f"You have {attempts} attempts and {lives} lives left. You have used these letters: {' '.join(guessed_letters)}"
+            )
+            print("Please enter a single letter or the enter word.")
 
     play_again = input("Do you want to play again? (yes/no): ").lower()
     if play_again == "yes":

@@ -1,1 +1,1 @@
-word_list = [ "strawberrye"]
+word_list = ["apple", "banana", "orange", "grape", "strawberrye", "pineapple"]
