@@ -53,9 +53,8 @@ def hangman():
             guessed_letters.append(guess)
             if guess not in word:
                 lives -= 1
-                # --------------------------------------------------------------------------------
-                # print(f"Incorrect! You have {lives} lives left.")
-                # ---------------------------------------------------------------------------
+                print("Incorrect guess!")
+
                 if lives == 0:
                     print(visual_dict[lives])
                     print(
@@ -67,7 +66,7 @@ def hangman():
 
             attempts -= 1
             print(
-                f"Incorrect! You have {attempts} attempts and {lives} lives left. You have used these letters: {' '.join(guessed_letters)}"
+                f"You have {attempts} attempts and {lives} lives left. You have used these letters: {' '.join(guessed_letters)}"
             )
             print(visual_dict[lives])
             if attempts == 0:
