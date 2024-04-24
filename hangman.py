@@ -23,7 +23,7 @@ def display_full_word(word: str) -> str:
     return word
 
 
-def hangman():
+def hangman() -> None:
     word = choose_word(word_list)
     guessed_letters = []
     attempts = 10
