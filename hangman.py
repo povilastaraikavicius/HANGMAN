@@ -31,6 +31,7 @@ def hangman() -> None:
 
     print("Welcome to Hangman!")
     print("Try to guess the word. You have 10 attempts and 6 lives.")
+    print(visual_dict[6])
 
     while attempts > 0:
         print("\n" + display_word(word, guessed_letters))
