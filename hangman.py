@@ -44,6 +44,7 @@ def hangman() -> None:
             if guess in guessed_letters:
                 attempts -= 1
                 lives -= 1
+                
                 print(visual_dict[lives])
                 print("You already guessed that letter.")
                 print(
