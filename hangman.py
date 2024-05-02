@@ -90,7 +90,7 @@ def hangman() -> None:
             print(
                 f"You have {attempts} attempts and {lives} lives left. You have used these letters: {' '.join(guessed_letters)}"
             )
-            print("Please enter a single letter or the enter word.")
+            print("Please enter a single letter or the enter word using only alphabetic characters.")
 
     play_again = input("Do you want to play again? (yes/no): ").lower()
     if play_again == "yes":
